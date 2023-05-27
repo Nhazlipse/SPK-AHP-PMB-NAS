@@ -83,7 +83,7 @@ include "koneksi.php";
                                                     <h5 class="name">
                                                         <a href="#">Administrasi</a>
                                                     </h5>
-                                                    <span class="email">kontolodon@memeka.com</span>
+    
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">

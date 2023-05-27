@@ -82,7 +82,6 @@ include "../layout/header.php";
                                                     <h5 class="name">
                                                         <a href="#">Administrasi</a>
                                                     </h5>
-                                                    <span class="email">kontolodon@memeka.com</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -258,40 +257,87 @@ include "../layout/header.php";
                                 <?php endforeach ?>
                                 <hr>
                                 <h4 class="subtitle">Hasil</h4>
-                                <div class="table-container">
-                                    <table class="table is-fullwidth">
-                                        <thead class="has-background-success">
-                                            <tr>
-                                                <th class="has-text-white">No</th>
-                                                <th class="has-text-white">Alternatif</th>
-                                                <th class="has-text-white">Nilai</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot class="has-background-success">
-                                            <tr>
-                                                <th class="has-text-white">No</th>
-                                                <th class="has-text-white">Alternatif</th>
-                                                <th class="has-text-white">Nilai</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <?php $h = 1 ?>
-                                            <?php $i = 0 ?>
-                                            <?php $j = 0 ?>
-                                            <?php foreach ($alternatif as $row) : ?>
-                                                <?php $varV[$j] = 1 ?>
-                                                <?php $varV[$j] = $test[$i] / $totalS ?>
-                                                <tr>
-                                                    <th><?= $h++ ?></th>
-                                                    <td><?= $row["name"] ?></td>
-                                                    <td><?= round(round($test[$i], 3) / round($totalS, 3), 3) ?></td>
-                                                </tr>
-                                                <?php $i++ ?>
-                                                <?php $j++ ?>
-                                            <?php endforeach ?>
-                                        </tbody>
-                                    </table>
-                                </div>
+<div class="table-container">
+    <table class="table is-fullwidth">
+        <thead class="has-background-success">
+            <tr>
+                <th class="has-text-white">No</th>
+                <th class="has-text-white">Alternatif</th>
+                <th class="has-text-white">Nilai</th>
+            </tr>
+        </thead>
+        <tfoot class="has-background-success">
+            <tr>
+                <th class="has-text-white">No</th>
+                <th class="has-text-white">Alternatif</th>
+                <th class="has-text-white">Nilai</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <?php 
+            $h = 1;
+            $i = 0;
+            $j = 0;
+            $minIndex = $maxIndex = 0;
+            $minValue = $maxValue = $test[0] / $totalS;  // Assuming $test and $totalS are properly initialized
+            foreach ($alternatif as $row) : 
+                $varV[$j] = $test[$i] / $totalS;
+                if ($varV[$j] < $minValue) {
+                    $minValue = $varV[$j];
+                    $minIndex = $i;
+                }
+                if ($varV[$j] > $maxValue) {
+                    $maxValue = $varV[$j];
+                    $maxIndex = $i;
+                }
+            ?>
+                <tr>
+                    <th><?= $h++ ?></th>
+                    <td><?= $row["name"] ?></td>
+                    <td><?= round(round($test[$i], 3) / round($totalS, 3), 3) ?></td>
+                </tr>
+                <?php 
+                $i++;
+                $j++;
+            endforeach;
+            ?>
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .button.is-success {
+        background-color: #007BFF;  // Ganti warna latar belakang menjadi biru
+        color: white;
+        border: none;
+        padding: 10px 20px;  // Kurangi padding
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;  // Kurangi ukuran font
+        margin: 4px 20px 4px 2px;  // Tambahkan margin kanan
+        cursor: pointer;
+        border-radius: 12px;
+        transition-duration: 0.4s;
+        float: left;  // Posisikan tombol di kiri
+    }
+
+    .button.is-success:hover {
+        background-color: white;
+        color: #007BFF;  // Ganti warna teks saat hover menjadi biru
+        border: 2px solid #007BFF;  // Ganti warna border saat hover menjadi biru
+    }
+</style>
+
+<button class="button is-success" onclick="alert('Nilai Terendah: <?= $minValue ?> (<?= $alternatif[$minIndex]["name"] ?>)\nNilai Terbesar: <?= $maxValue ?> (<?= $alternatif[$maxIndex]["name"] ?>)')">Kesimpulan</button>
+
+
+
+
+<br><br>
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -309,7 +355,7 @@ include "../layout/header.php";
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
-                                    <p>SPK - PMB Metode AHP</a>.</p>
+                                    <p>SPK - PMB Metode WP</a>.</p>
                                 </div>
                             </div>
                         </div>

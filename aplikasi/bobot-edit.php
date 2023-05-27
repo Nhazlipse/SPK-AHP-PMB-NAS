@@ -1,4 +1,13 @@
 <?php
+require "koneksi.php";
+$id = $_GET['id'];
+$sql = "SELECT * FROM saw_criterias WHERE id_criteria = '$id' ";
+$result = $db->query($sql);
+$row = $result->fetch_array();
+?>
+
+
+<?php
 include "../layout/header.php";
 
 ?>
@@ -38,7 +47,7 @@ include "../layout/header.php";
                                 <li>
                                     <a href="matrik.php">Input Data</a>
                                 </li>
-
+                                
                             </ul>
                         </li>
                         <li>
@@ -82,6 +91,7 @@ include "../layout/header.php";
                                                     <h5 class="name">
                                                         <a href="#">Administrasi</a>
                                                     </h5>
+                        
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -107,47 +117,54 @@ include "../layout/header.php";
                         <div class="row">
                             <div class="col-md-12">
 
-                        <p><h2 align="center">APLIKASI PENERIMAAN MAHASISWA BARU MENGGUNAKAN METODE WP</h2></p>
-                        <br>
 
+
+
+                            <div id="main">
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+    <div class="page-heading">
+        <h3 class="text-center mb-4">Bobot Edit</h3>
+    </div>
+    <div class="page-content">
+        <section class="row">
+            <div class="col-lg-12 mx-auto">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h4 class="card-title">Edit Data</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <form action="bobot-edit-act.php" method="POST">
+                            <div class="form-group">
+                                <label for="criteriaInput">Kriteria</label>
+                                <input type="text" class="form-control" name="id_criteria" value="<?=$row['id_criteria'];?>" hidden>
+                                <input type="text" class="form-control" name="criteria" id="criteriaInput" value="<?=$row['criteria'];?>">
                             </div>
-                        </div>
-                        
-
-
-                        <div class="page-content">
-                    <section class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Weight Product</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                        SPK Aplikasi Penerimaan Mahasiswa Baru Menggunakan Metode Weight
-                                        </p>
-                                        <hr>
-                                        <p class="card-text">SPK (Sistem Pendukung Keputusan) Aplikasi Penerimaan Mahasiswa Baru menggunakan metode Weight Product adalah sebuah sistem yang dirancang untuk membantu dalam pengambilan keputusan dalam proses penerimaan mahasiswa baru di sebuah institusi pendidikan.
-                                        </p>
-                                        <br>
-                                        <p class="card-text">Metode Weight Product (WP) adalah metode pengambilan keputusan yang menggunakan pembobotan terhadap kriteria-kriteria yang relevan untuk menentukan peringkat alternatif. Dalam konteks ini, kriteria-kriteria tersebut dapat mencakup nilai akademik, prestasi ekstrakurikuler, tes masuk, atau kriteria lainnya yang relevan dalam proses seleksi.
-                                        </p>
-                                        <br>
-                                        <p class="card-text">SPK ini memungkinkan pihak yang bertanggung jawab dalam penerimaan mahasiswa baru, seperti panitia seleksi atau staf administrasi, untuk menginput data dan bobot kriteria yang diperlukan. Selanjutnya, SPK akan melakukan perhitungan berdasarkan metode Weight Product untuk memberikan peringkat atau skor kepada setiap calon mahasiswa baru.
-                                        </p>
-                                        <br>
-                                        <p class="card-text">Dengan menggunakan metode Weight Product, SPK ini dapat membantu memudahkan proses seleksi mahasiswa baru dengan memberikan hasil yang lebih objektif dan terukur. Dalam hal ini, keputusan akhir tentang penerimaan mahasiswa baru masih bergantung pada pihak yang bertanggung jawab, namun SPK ini dapat menjadi alat yang berharga dalam membantu mereka dalam proses pengambilan keputusan yang lebih efisien dan konsisten.
-                                        </p>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="weightInput">Weight</label>
+                                <input type="text" class="form-control" name="weight" id="weightInput" value="<?=$row['weight'];?>">
                             </div>
-                        </div>
-                    </section>
+                            <div class="form-group">
+                                <label for="attributeInput">Attribute</label>
+                                <select class="form-control form-select" name="attribute" id="attributeInput">
+                                    <option value="benefit">Benefit</option>
+                                    <option value="cost">Cost</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-info btn-sm">
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-
-
+            </div>
+        </section>
+    </div>
+</div>
 
 
 

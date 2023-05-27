@@ -1,4 +1,12 @@
 <?php
+require "koneksi.php";
+$id = $_GET['id'];
+$sql = "SELECT * FROM saw_alternatives WHERE id_alternative = '$id' ";
+$result = $db->query($sql);
+$row = $result->fetch_array();
+?>
+
+<?php
 include "../layout/header.php";
 
 ?>
@@ -100,38 +108,67 @@ include "../layout/header.php";
             </header>
             <!-- HEADER DESKTOP-->
 
-            <!-- MAIN CONTENT -->
+            <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                                <!-- Form -->
-                                <form action="alternatif-simpan.php" method="post">
-                                    <div class="form-group">
-                                        <label for="candidateName">Name:</label>
-                                        <input type="text" id="candidateName" name="name" placeholder="Nama Kandidat..." class="form-control" required>
-                                    </div>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" name="add_alternatif" class="btn btn-primary">Simpan</button>
-                                </form>
-                                <!-- End Form -->
+
+
+
+                            <div id="main">
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+    <div class="page-heading">
+        <h3 class="text-center mb-4">Alternatif Edit</h3>
+    </div>
+    <div class="page-content">
+        <section class="row">
+            <div class="col-lg-12 mx-auto">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h4 class="card-title">Edit Data</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <form action="alternatif-edit-act.php" method="POST">
+                            <div class="form-group">
+                                <label for="basicInput">Name</label>
+                                <input type="text" class="form-control" name="id_alternative" value="<?=$row['id_alternative'];?>" hidden>
+                                <input type="text" class="form-control" name="name" id="basicInput" value="<?=$row['name'];?>">
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-info btn-sm">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 
                         <div class="row">
                             <div class="col-md-12">
-                                <!-- Footer -->
                                 <div class="copyright">
-                                    <p>SPK - PMB Metode AHP</p>
+                                    <p>SPK - PMB Metode WP</a>.</p>
                                 </div>
-                                <!-- End Footer -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- END MAIN CONTENT -->
+            <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
 

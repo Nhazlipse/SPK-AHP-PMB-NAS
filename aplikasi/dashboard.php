@@ -1,8 +1,6 @@
 <?php
-include "koneksi.php";
 include "../layout/header.php";
-include "W.php";
-include "R.php";
+
 ?>
 
 <body class="animsition">
@@ -37,7 +35,10 @@ include "R.php";
                                 <li>
                                     <a href="bobot.php">Bobot & Kriteria</a>
                                 </li>
-                                
+                                <li>
+                                    <a href="matrik.php">Input Data</a>
+                                </li>
+
                             </ul>
                         </li>
                         <li>
@@ -106,31 +107,48 @@ include "R.php";
                         <div class="row">
                             <div class="col-md-12">
 
-              
+                        <p><h2 align="center">APLIKASI PENERIMAAN MAHASISWA BARU MENGGUNAKAN METODE WP</h2></p>
+                        <br>
+
+                            </div>
+                        </div>
+                        
 
 
-                
-  <?php
-
-$P = array();
-$m = count($W);
-$no = 0;
-foreach ($R as $i => $r) {
-    for ($j = 0; $j < $m; $j++) {
-        $P[$i] = (isset($P[$i]) ? $P[$i] : 0) + $r[$j] * $W[$j];
-    }
-    
-}
-?>
-                    </table>
-                  </div>
+                        <div class="page-content">
+                    <section class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Weight Product</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                        SPK Aplikasi Penerimaan Mahasiswa Baru Menggunakan Metode Weight
+                                        </p>
+                                        <hr>
+                                        <p class="card-text">SPK (Sistem Pendukung Keputusan) Aplikasi Penerimaan Mahasiswa Baru menggunakan metode Weight Product adalah sebuah sistem yang dirancang untuk membantu dalam pengambilan keputusan dalam proses penerimaan mahasiswa baru di sebuah institusi pendidikan.
+                                        </p>
+                                        <br>
+                                        <p class="card-text">Metode Weight Product (WP) adalah metode pengambilan keputusan yang menggunakan pembobotan terhadap kriteria-kriteria yang relevan untuk menentukan peringkat alternatif. Dalam konteks ini, kriteria-kriteria tersebut dapat mencakup nilai akademik, prestasi ekstrakurikuler, tes masuk, atau kriteria lainnya yang relevan dalam proses seleksi.
+                                        </p>
+                                        <br>
+                                        <p class="card-text">SPK ini memungkinkan pihak yang bertanggung jawab dalam penerimaan mahasiswa baru, seperti panitia seleksi atau staf administrasi, untuk menginput data dan bobot kriteria yang diperlukan. Selanjutnya, SPK akan melakukan perhitungan berdasarkan metode Weight Product untuk memberikan peringkat atau skor kepada setiap calon mahasiswa baru.
+                                        </p>
+                                        <br>
+                                        <p class="card-text">Dengan menggunakan metode Weight Product, SPK ini dapat membantu memudahkan proses seleksi mahasiswa baru dengan memberikan hasil yang lebih objektif dan terukur. Dalam hal ini, keputusan akhir tentang penerimaan mahasiswa baru masih bergantung pada pihak yang bertanggung jawab, namun SPK ini dapat menjadi alat yang berharga dalam membantu mereka dalam proses pengambilan keputusan yang lebih efisien dan konsisten.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
+
+
+
+
 
 
 
@@ -139,7 +157,7 @@ foreach ($R as $i => $r) {
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
-                                    <p>SPK - PMB Metode AHP</a>.</p>
+                                    <p>SPK - PMB Metode WP</a>.</p>
                                 </div>
                             </div>
                         </div>
@@ -153,6 +171,3 @@ foreach ($R as $i => $r) {
     </div>
 
     <?php include "../layout/footer.php";?>
-
-
-      

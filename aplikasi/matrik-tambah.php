@@ -1,4 +1,3 @@
-
 <?php
 include "../layout/header.php";
 include "koneksi.php";
@@ -83,7 +82,6 @@ include "koneksi.php";
                                                     <h5 class="name">
                                                         <a href="#">Administrasi</a>
                                                     </h5>
-                                                    <span class="email">kontolodon@memeka.com</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -102,90 +100,83 @@ include "koneksi.php";
             </header>
             <!-- HEADER DESKTOP-->
 
-            <!-- MAIN CONTENT-->
-<div class="main-content">
-    <div class="section__content section__content--p30">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
 
-                </div>
-            </div>
-            <div id="main">
-                <header class="mb-3">
-                    <a href="#" class="burger-btn d-block d-xl-none">
-                        <i class="bi bi-justify fs-3"></i>
-                    </a>
-                </header>
-
-                <div class="page-content">
-                    <div class="page-heading text-center my-3">
-                        <h3 class="display-4">Bobot Kriteria</h3>
-                    </div>
-
-                    <section class="row">
-                        <div class="col-12">
-                            <div class="card border-primary mb-3">
-                                <div class="card-header bg-primary text-white">
-                                    <h4 class="card-title">Tabel Bobot Kriteria</h4>
+                                <!-- Form -->
+                        <form action="matrik-simpan.php" method="POST">
+                            <div class="">
+                                <label>Nama: </label>
+                                <div class="form-group">
+                                <select class="form-control form-select" name="id_alternative">
+                                <?php
+    $sql = 'SELECT id_alternative,name FROM saw_alternatives';
+    $result = $db->query($sql);
+    $i = 0;
+    while ($row = $result->fetch_object()) {
+        echo '<option value="' . $row->id_alternative . '">' . $row->name . '</option>';
+    }
+    $result->free();
+    ?>
+                                              </select>
                                 </div>
+                            </div>
+                            <div class="">
+                                <label>Criteria: </label>
+                                <div class="form-group">
+                                <select class="form-control form-select" name="id_criteria">
+                                <?php
+    $sql = 'SELECT * FROM saw_criterias';
+    $result = $db->query($sql);
+    $i = 0;
+    while ($row = $result->fetch_object()) {
+        echo '<option value="' . $row->id_criteria . '">' . $row->criteria . '</option>';
+    }
+    $result->free();
+    ?>
+                                              </select>
+                                </div>
+                            </div>
+                            <div class="">
+                                <label>Value: </label>
+                                <div class="form-group">
+                                    <input type="text" name="value" placeholder="value..." class="form-control"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="">
+                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Close</span>
+                                </button>
+                                <button type="submit" name="submit" class="btn btn-primary ml-1">
+                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Simpan</span>
+                                </button>
+                            </div>
+                        </form>
+                        <!-- End Form -->
 
-                                <div class="card-body">
-                                    
-                                    <div class="table-responsive">
-                                        <table class="table table-striped mb-0">
-                                            <caption>
-                                                Tabel Kriteria C<sub>i</sub>
-                                            </caption>
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Simbol</th>
-                                                    <th>Kriteria</th>
-                                                    <th>Bobot</th>
-                                                    <th colspan="2">Atribut</th>
-                                                </tr>
-  <?php
-$sql = 'SELECT id_criteria,criteria,weight,attribute FROM saw_criterias';
-$result = $db->query($sql);
-$i = 0;
-while ($row = $result->fetch_object()) {
-    echo "<tr>
-        <td class='right'>" . (++$i) . "</td>
-        <td class='center'>C{$i}</td>
-        <td>{$row->criteria}</td>
-        <td>{$row->weight}</td>
-        <td>{$row->attribute}</td>
-        <td>
-            <a href='bobot-edit.php?id={$row->id_criteria}' class='btn btn-info btn-sm'>Edit</a>
-            </td>
-      </tr>\n";
-}
-$result->free();
-?>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-
-
-
-
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-md-12">
+                                <!-- Footer -->
                                 <div class="copyright">
-                                    <p>SPK - PMB Metode AHP</a>.</p>
+                                    <p>SPK - PMB Metode WP</p>
                                 </div>
+                                <!-- End Footer -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- END MAIN CONTENT-->
+            <!-- END MAIN CONTENT -->
             <!-- END PAGE CONTAINER-->
         </div>
 

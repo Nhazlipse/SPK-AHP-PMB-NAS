@@ -1,6 +1,6 @@
 <?php
 include "../layout/header.php";
-include "koneksi.php";
+
 ?>
 
 <body class="animsition">
@@ -106,61 +106,16 @@ include "koneksi.php";
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-
                                 <!-- Form -->
-                        <form action="matrik-simpan.php" method="POST">
-                            <div class="">
-                                <label>Nama: </label>
-                                <div class="form-group">
-                                <select class="form-control form-select" name="id_alternative">
-                                <?php
-    $sql = 'SELECT id_alternative,name FROM saw_alternatives';
-    $result = $db->query($sql);
-    $i = 0;
-    while ($row = $result->fetch_object()) {
-        echo '<option value="' . $row->id_alternative . '">' . $row->name . '</option>';
-    }
-    $result->free();
-    ?>
-                                              </select>
-                                </div>
-                            </div>
-                            <div class="">
-                                <label>Criteria: </label>
-                                <div class="form-group">
-                                <select class="form-control form-select" name="id_criteria">
-                                <?php
-    $sql = 'SELECT * FROM saw_criterias';
-    $result = $db->query($sql);
-    $i = 0;
-    while ($row = $result->fetch_object()) {
-        echo '<option value="' . $row->id_criteria . '">' . $row->criteria . '</option>';
-    }
-    $result->free();
-    ?>
-                                              </select>
-                                </div>
-                            </div>
-                            <div class="">
-                                <label>Value: </label>
-                                <div class="form-group">
-                                    <input type="text" name="value" placeholder="value..." class="form-control"
-                                        required>
-                                </div>
-                            </div>
-                            <div class="">
-                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Close</span>
-                                </button>
-                                <button type="submit" name="submit" class="btn btn-primary ml-1">
-                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Simpan</span>
-                                </button>
-                            </div>
-                        </form>
-                        <!-- End Form -->
-
+                                <form action="alternatif-simpan.php" method="post">
+                                    <div class="form-group">
+                                        <label for="candidateName">Name:</label>
+                                        <input type="text" id="candidateName" name="name" placeholder="Nama Kandidat..." class="form-control" required>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" name="add_alternatif" class="btn btn-primary">Simpan</button>
+                                </form>
+                                <!-- End Form -->
                             </div>
                         </div>
 
@@ -168,7 +123,7 @@ include "koneksi.php";
                             <div class="col-md-12">
                                 <!-- Footer -->
                                 <div class="copyright">
-                                    <p>SPK - PMB Metode AHP</p>
+                                    <p>SPK - PMB Metode WP</p>
                                 </div>
                                 <!-- End Footer -->
                             </div>
