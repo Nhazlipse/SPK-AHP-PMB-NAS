@@ -1,7 +1,6 @@
 <?php
 include "../layout/header.php";
 include "koneksi.php";
-
 ?>
 
 <body class="animsition">
@@ -83,7 +82,6 @@ include "koneksi.php";
                                                     <h5 class="name">
                                                         <a href="#">Administrasi</a>
                                                     </h5>
-                                                    <span class="email">kontolodon@memeka.com</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -102,103 +100,86 @@ include "koneksi.php";
             </header>
             <!-- HEADER DESKTOP-->
 
-            <!-- MAIN CONTENT-->
+            <!-- MAIN CONTENT -->
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
 
+                                <!-- Form -->
+                        <form action="matrik-simpan.php" method="POST">
+                            <div class="">
+                                <label>Nama: </label>
+                                <div class="form-group">
+                                <select class="form-control form-select" name="id_alternative">
+                                <?php
+    $sql = 'SELECT id_alternative,name FROM saw_alternatives';
+    $result = $db->query($sql);
+    $i = 0;
+    while ($row = $result->fetch_object()) {
+        echo '<option value="' . $row->id_alternative . '">' . $row->name . '</option>';
+    }
+    $result->free();
+    ?>
+                                              </select>
+                                </div>
+                            </div>
+                            <div class="">
+                                <label>Criteria: </label>
+                                <div class="form-group">
+                                <select class="form-control form-select" name="id_criteria">
+                                <?php
+    $sql = 'SELECT * FROM saw_criterias';
+    $result = $db->query($sql);
+    $i = 0;
+    while ($row = $result->fetch_object()) {
+        echo '<option value="' . $row->id_criteria . '">' . $row->criteria . '</option>';
+    }
+    $result->free();
+    ?>
+                                              </select>
+                                </div>
+                            </div>
+                            <div class="">
+                                <label>Value: </label>
+                                <div class="form-group">
+                                    <input type="text" name="value" placeholder="value..." class="form-control"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="">
+                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Close</span>
+                                </button>
+                                <button type="submit" name="submit" class="btn btn-primary ml-1">
+                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Simpan</span>
+                                </button>
+                            </div>
+                        </form>
+                        <!-- End Form -->
+
                             </div>
                         </div>
-                        
 
-
-
-                        <div id="main">
-    <header class="mb-3">
-        <a href="#" class="burger-btn d-block d-xl-none">
-            <i class="bi bi-justify fs-3"></i>
-        </a>
-    </header>
-
-    <div class="page-content">
-        <div class="page-heading text-center my-3">
-            <h3 class="display-4">Alternatif</h3>
-        </div>
-
-        <section class="row">
-            <div class="col-12">
-                <div class="card border-primary mb-3">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="card-title">Tabel Alternatif</h4>
-                    </div>
-
-                    <div class="card-body">
-                        
-
-                        <!-- Button trigger modal -->
-                        <a href="alternatif-tambah.php" class="btn btn-info mb-3">Tambah Data</a>
-
-                        <div class="table-responsive">
-                            <table class="table table-striped mb-0">
-                                <caption>
-                                    Tabel Alternatif A<sub>i</sub>
-                                </caption>
-
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                <?php
-$sql = 'SELECT id_alternative,name FROM saw_alternatives';
-$result = $db->query($sql);
-$i = 0;
-while ($row = $result->fetch_object()) {
-    echo "<tr>
-        <td class='right'>" . (++$i) . "</td>
-        <td class='center'>{$row->name}</td>
-        <td>
-        <div class='btn-group mb-1'>
-        <div class='dropdown'>
-            <button class='btn btn-primary dropdown-toggle me-1 btn-sm' type='button'
-                id='dropdownMenuButton' data-bs-toggle='dropdown'
-                aria-haspopup='true' aria-expanded='false'>
-                Aksi
-            </button>
-            <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-                <a class='dropdown-item' href='alternatif-edit.php?id={$row->id_alternative}'>Edit</a>
-                <a class='dropdown-item' href='alternatif-hapus.php?id={$row->id_alternative}'>Hapus</a>
-            </div>
-        </div>
-    </div>
-        </td>
-      </tr>\n";
-}
-$result->free();
-?>
-                                </tbody>
-                            </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Footer -->
+                                <div class="copyright">
+                                    <p>SPK - PMB Metode AHP</p>
+                                </div>
+                                <!-- End Footer -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
-</div>
-
-
-
-
-            <!-- END MAIN CONTENT-->
+            <!-- END MAIN CONTENT -->
             <!-- END PAGE CONTAINER-->
         </div>
 
     </div>
-    <?php require "../layout/js.php";?>
+
     <?php include "../layout/footer.php";?>

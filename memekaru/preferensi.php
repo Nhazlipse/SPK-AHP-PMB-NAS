@@ -1,7 +1,8 @@
 <?php
-include "../layout/header.php";
 include "koneksi.php";
-
+include "../layout/header.php";
+include "W.php";
+include "R.php";
 ?>
 
 <body class="animsition">
@@ -35,9 +36,6 @@ include "koneksi.php";
                                 </li>
                                 <li>
                                     <a href="bobot.php">Bobot & Kriteria</a>
-                                </li>
-                                <li>
-                                    <a href="matrik.php">Input Data</a>
                                 </li>
                                 
                             </ul>
@@ -83,7 +81,6 @@ include "koneksi.php";
                                                     <h5 class="name">
                                                         <a href="#">Administrasi</a>
                                                     </h5>
-                                                    <span class="email">kontolodon@memeka.com</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -109,96 +106,53 @@ include "koneksi.php";
                         <div class="row">
                             <div class="col-md-12">
 
-                            </div>
-                        </div>
-                        
+              
 
 
+                
+  <?php
 
-                        <div id="main">
-    <header class="mb-3">
-        <a href="#" class="burger-btn d-block d-xl-none">
-            <i class="bi bi-justify fs-3"></i>
-        </a>
-    </header>
-
-    <div class="page-content">
-        <div class="page-heading text-center my-3">
-            <h3 class="display-4">Alternatif</h3>
-        </div>
-
-        <section class="row">
-            <div class="col-12">
-                <div class="card border-primary mb-3">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="card-title">Tabel Alternatif</h4>
-                    </div>
-
-                    <div class="card-body">
-                        
-
-                        <!-- Button trigger modal -->
-                        <a href="alternatif-tambah.php" class="btn btn-info mb-3">Tambah Data</a>
-
-                        <div class="table-responsive">
-                            <table class="table table-striped mb-0">
-                                <caption>
-                                    Tabel Alternatif A<sub>i</sub>
-                                </caption>
-
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                <?php
-$sql = 'SELECT id_alternative,name FROM saw_alternatives';
-$result = $db->query($sql);
-$i = 0;
-while ($row = $result->fetch_object()) {
-    echo "<tr>
-        <td class='right'>" . (++$i) . "</td>
-        <td class='center'>{$row->name}</td>
-        <td>
-        <div class='btn-group mb-1'>
-        <div class='dropdown'>
-            <button class='btn btn-primary dropdown-toggle me-1 btn-sm' type='button'
-                id='dropdownMenuButton' data-bs-toggle='dropdown'
-                aria-haspopup='true' aria-expanded='false'>
-                Aksi
-            </button>
-            <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-                <a class='dropdown-item' href='alternatif-edit.php?id={$row->id_alternative}'>Edit</a>
-                <a class='dropdown-item' href='alternatif-hapus.php?id={$row->id_alternative}'>Hapus</a>
-            </div>
-        </div>
-    </div>
-        </td>
-      </tr>\n";
+$P = array();
+$m = count($W);
+$no = 0;
+foreach ($R as $i => $r) {
+    for ($j = 0; $j < $m; $j++) {
+        $P[$i] = (isset($P[$i]) ? $P[$i] : 0) + $r[$j] * $W[$j];
+    }
+    
 }
-$result->free();
 ?>
-                                </tbody>
-                            </table>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>SPK - PMB Metode AHP</a>.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
-</div>
-
-
-
-
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
 
     </div>
-    <?php require "../layout/js.php";?>
+
     <?php include "../layout/footer.php";?>
+
+
+      

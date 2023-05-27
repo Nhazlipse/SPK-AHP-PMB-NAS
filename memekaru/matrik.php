@@ -1,3 +1,4 @@
+
 <?php
 include "../layout/header.php";
 include "koneksi.php";
@@ -83,7 +84,6 @@ include "koneksi.php";
                                                     <h5 class="name">
                                                         <a href="#">Administrasi</a>
                                                     </h5>
-                                                    <span class="email">kontolodon@memeka.com</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -109,96 +109,204 @@ include "koneksi.php";
                         <div class="row">
                             <div class="col-md-12">
 
-                            </div>
-                        </div>
-                        
 
-
-
-                        <div id="main">
-    <header class="mb-3">
-        <a href="#" class="burger-btn d-block d-xl-none">
+                <div id="main">
+        <header class="mb-3">
+          <a href="#" class="burger-btn d-block d-xl-none">
             <i class="bi bi-justify fs-3"></i>
-        </a>
-    </header>
-
-    <div class="page-content">
-        <div class="page-heading text-center my-3">
-            <h3 class="display-4">Alternatif</h3>
+          </a>
+        </header>
+        <div class="page-heading">
+          <h3>Matrik</h3>
         </div>
-
-        <section class="row">
+        <div class="page-content">
+          <section class="row">
             <div class="col-12">
-                <div class="card border-primary mb-3">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="card-title">Tabel Alternatif</h4>
-                    </div>
+              <div class="card">
 
-                    <div class="card-body">
-                        
+                <div class="card-header">
+                  <h4 class="card-title">Matriks Keputusan (X) &amp; Ternormalisasi (R)</h4>
+                </div>
+                <div class="card-content">
+                  <div class="card-body">
+                  <!-- Button trigger modal -->
+                  <a href="matrik-tambah.php" class="btn btn-info mb-3">Tambah Data</a>
 
-                        <!-- Button trigger modal -->
-                        <a href="alternatif-tambah.php" class="btn btn-info mb-3">Tambah Data</a>
-
-                        <div class="table-responsive">
-                            <table class="table table-striped mb-0">
-                                <caption>
-                                    Tabel Alternatif A<sub>i</sub>
-                                </caption>
-
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                <?php
-$sql = 'SELECT id_alternative,name FROM saw_alternatives';
+                  <div class="table-responsive">
+                  </div>
+                  
+                  <table class="table table-striped mb-0">
+    <caption>
+        Matrik Keputusan(X)
+    </caption>
+    <tr>
+        <th rowspan='2'>Alternatif</th>
+        <th colspan='6'>Kriteria</th>
+    </tr>
+    <tr>
+        <th>C1</th>
+        <th>C2</th>
+        <th>C3</th>
+        <th>C4</th>
+        <th colspan="2">C5</th>
+    </tr>
+    <?php
+$sql = "SELECT
+          a.id_alternative,
+          b.name,
+          SUM(IF(a.id_criteria=1,a.value,0)) AS C1,
+          SUM(IF(a.id_criteria=2,a.value,0)) AS C2,
+          SUM(IF(a.id_criteria=3,a.value,0)) AS C3,
+          SUM(IF(a.id_criteria=4,a.value,0)) AS C4,
+          SUM(IF(a.id_criteria=5,a.value,0)) AS C5
+        FROM
+          saw_evaluations a
+          JOIN saw_alternatives b USING(id_alternative)
+        GROUP BY a.id_alternative
+        ORDER BY a.id_alternative";
 $result = $db->query($sql);
-$i = 0;
+$X = array(1 => array(), 2 => array(), 3 => array(), 4 => array(), 5 => array());
 while ($row = $result->fetch_object()) {
-    echo "<tr>
-        <td class='right'>" . (++$i) . "</td>
-        <td class='center'>{$row->name}</td>
-        <td>
-        <div class='btn-group mb-1'>
-        <div class='dropdown'>
-            <button class='btn btn-primary dropdown-toggle me-1 btn-sm' type='button'
-                id='dropdownMenuButton' data-bs-toggle='dropdown'
-                aria-haspopup='true' aria-expanded='false'>
-                Aksi
-            </button>
-            <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-                <a class='dropdown-item' href='alternatif-edit.php?id={$row->id_alternative}'>Edit</a>
-                <a class='dropdown-item' href='alternatif-hapus.php?id={$row->id_alternative}'>Hapus</a>
-            </div>
-        </div>
-    </div>
-        </td>
-      </tr>\n";
+    array_push($X[1], round($row->C1, 2));
+    array_push($X[2], round($row->C2, 2));
+    array_push($X[3], round($row->C3, 2));
+    array_push($X[4], round($row->C4, 2));
+    array_push($X[5], round($row->C5, 2));
+    echo "<tr class='center'>
+            <th>{$row->name}</th>
+            <td>" . round($row->C1, 2) . "</td>
+            <td>" . round($row->C2, 2) . "</td>
+            <td>" . round($row->C3, 2) . "</td>
+            <td>" . round($row->C4, 2) . "</td>
+            <td>" . round($row->C5, 2) . "</td>
+            <td>
+            <a href='keputusan-hapus.php?id={$row->id_alternative}' class='btn btn-danger btn-sm'>Hapus</a>
+            </td>
+          </tr>\n";
 }
 $result->free();
+
 ?>
-                                </tbody>
-                            </table>
+</table>
+
+<table class="table table-striped mb-0">
+    <caption>
+        Matrik Ternormalisasi (R)
+    </caption>
+    <tr>
+        <th rowspan='2'>Alternatif</th>
+        <th colspan='5'>Kriteria</th>
+    </tr>
+    <tr>
+        <th>C1</th>
+        <th>C2</th>
+        <th>C3</th>
+        <th>C4</th>
+        <th>C5</th>
+    </tr>
+    <?php
+$sql = "SELECT
+          a.id_alternative,
+          c.name,
+          SUM(
+            IF(
+              a.id_criteria=1,
+              IF(
+                b.attribute='benefit',
+                a.value/" . max($X[1]) . ",
+                " . min($X[1]) . "/a.value)
+              ,0)
+              ) AS C1,
+          SUM(
+            IF(
+              a.id_criteria=2,
+              IF(
+                b.attribute='benefit',
+                a.value/" . max($X[2]) . ",
+                " . min($X[2]) . "/a.value)
+               ,0)
+             ) AS C2,
+          SUM(
+            IF(
+              a.id_criteria=3,
+              IF(
+                b.attribute='benefit',
+                a.value/" . max($X[3]) . ",
+                " . min($X[3]) . "/a.value)
+               ,0)
+             ) AS C3,
+          SUM(
+            IF(
+              a.id_criteria=4,
+              IF(
+                b.attribute='benefit',
+                a.value/" . max($X[4]) . ",
+                " . min($X[4]) . "/a.value)
+               ,0)
+             ) AS C4,
+          SUM(
+            IF(
+              a.id_criteria=5,
+              IF(
+                b.attribute='benefit',
+                a.value/" . max($X[5]) . ",
+                " . min($X[5]) . "/a.value)
+               ,0)
+             ) AS C5
+        FROM
+          saw_evaluations a
+          JOIN saw_criterias b USING(id_criteria)
+          JOIN saw_alternatives c USING(id_alternative)
+        GROUP BY a.id_alternative
+        ORDER BY a.id_alternative
+       ";
+$result = $db->query($sql);
+$R = array();
+while ($row = $result->fetch_object()) {
+    $R[$row->id_alternative] = array($row->C1, $row->C2, $row->C3, $row->C4, $row->C5);
+    echo "<tr class='center'>
+          <th>{$row->name}</th>
+            <td>" . round($row->C1, 2) . "</td>
+            <td>" . round($row->C2, 2) . "</td>
+            <td>" . round($row->C3, 2) . "</td>
+            <td>" . round($row->C4, 2) . "</td>
+            <td>" . round($row->C5, 2) . "</td>
+          </tr>\n";
+}
+?>
+</table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    <?php include "preferensi.php"?>
+
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>SPK - PMB Metode AHP</a>.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
-</div>
-
-
-
-
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
 
     </div>
-    <?php require "../layout/js.php";?>
-    <?php include "../layout/footer.php";?>

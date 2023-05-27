@@ -36,6 +36,9 @@ include "koneksi.php";
                                 <li>
                                     <a href="bobot.php">Bobot & Kriteria</a>
                                 </li>
+                                <li>
+                                    <a href="matrik.php">Input Data</a>
+                                </li>
                                 
                             </ul>
                         </li>

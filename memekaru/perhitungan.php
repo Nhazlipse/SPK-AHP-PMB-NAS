@@ -35,6 +35,9 @@ include "../layout/header.php";
                                 <li>
                                     <a href="bobot.php">Bobot & Kriteria</a>
                                 </li>
+                                <li>
+                                    <a href="matrik.php">Input Data</a>
+                                </li>
                                 
                             </ul>
                         </li>
@@ -303,9 +306,6 @@ include "../layout/header.php";
 
 
 
-
-
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
@@ -316,6 +316,7 @@ include "../layout/header.php";
                     </div>
                 </div>
             </div>
+            
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
